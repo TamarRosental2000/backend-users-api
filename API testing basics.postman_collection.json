@@ -1,0 +1,633 @@
+{
+	"info": {
+		"_postman_id": "23c3d948-7d56-46d6-afde-ba96014ed08d",
+		"name": "API testing basics",
+		"description": "# 🧪 Get started here\n\nPostman's powerful scripting feature helps you to write a range of API tests in JavaScript, including integration, regression, and contract tests.\n\nThis template demonstrates how to work with the Postman basic test syntax to test a single HTTP API request.\n\n## 🔖 How to use this template?\n\n#### Step 1: Send requests\n\nSend the sample requests and view the response and test results.\n\n#### Step 2: Update the sample request URL\n\nReplace the sample request URLs with your desired API endpoints.\n\n#### Step 3: Customize tests\n\nCustomize the tests in the \"Tests\" tab if needed. Don't forget to save your changes.\n\n## 💪 Quick tips for writing tests\n\n- Organize your test scenarios by grouping your requests in [collections](https://www.getpostman.com/docs/v6/postman/collections/intro_to_collections) and [folders](https://www.getpostman.com/docs/v6/postman/collections/managing_collections#adding-folders), and naming them descriptively\n- Document your API’s requirements using [markdown in the descriptions](https://www.getpostman.com/docs/v6/postman/collections/using_markdown_for_descriptions)\n- Use [variables](https://www.getpostman.com/docs/v6/postman/environments_and_globals/variables) to simulate more sophisticated user flows\n- Common tests that will be run after every request can be added to collection-level tests or folder-level tests\n    \n\n## ℹ️ Resources\n\n- [Test scripts](https://www.getpostman.com/docs/v6/postman/scripts/test_scripts)\n- [Test examples](https://www.getpostman.com/docs/v6/postman/scripts/test_examples)\n- [Quick reference guide](https://community.getpostman.com/t/the-postman-cheatsheet-quick-reference-guide/1054)\n- [Examples and guides](https://github.com/DannyDainton/All-Things-Postman)\n- [Writing tests in Postman](http://blog.getpostman.com/2017/10/25/writing-tests-in-postman/)\n- [API testing tips from a Postman professional](http://blog.getpostman.com/2017/07/28/api-testing-tips-from-a-postman-professional/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11928619"
+	},
+	"item": [
+		{
+			"name": "API tests",
+			"item": [
+				{
+					"name": "getUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/members/list/?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"members",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						},
+						"description": "This test is to validate the response status code. This Snippet is also available on the right sidebar under `Status code: Code in 200`."
+					},
+					"response": [
+						{
+							"name": "Status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"get"
+									],
+									"query": [
+										{
+											"key": "foo1",
+											"value": "bar1"
+										},
+										{
+											"key": "foo2",
+											"value": "bar2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Nov 2018 22:21:20 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1cd-LkUKVugbVYQuMcTU7OTzmp77cMo\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "348"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {\n        \"foo1\": \"bar1\",\n        \"foo2\": \"bar2\"\n    },\n    \"headers\": {\n        \"x-forwarded-proto\": \"https\",\n        \"host\": \"postman-echo.com\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"cookie\": \"sails.sid=s%3AK8csWt5VZ3Oalv85HiBtffDcrSOJ-RiP.V14RjjJqkOv8%2BLXuHRmZ9l50G8S6eU16yLU%2F3N%2F0dKU\",\n        \"postman-token\": \"c6b9bca5-7369-4da8-a539-6c906d1133f2\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\"\n    },\n    \"url\": \"https://postman-echo.com/get?foo1=bar1&foo2=bar2\"\n}"
+						}
+					]
+				},
+				{
+					"name": "getuser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/members/home/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"members",
+								"home",
+								"4"
+							]
+						},
+						"description": "This test is to validate the response status code. This Snippet is also available on the right sidebar under `Status code: Code in 200`."
+					},
+					"response": [
+						{
+							"name": "Status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"get"
+									],
+									"query": [
+										{
+											"key": "foo1",
+											"value": "bar1"
+										},
+										{
+											"key": "foo2",
+											"value": "bar2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Nov 2018 22:21:20 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1cd-LkUKVugbVYQuMcTU7OTzmp77cMo\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "348"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {\n        \"foo1\": \"bar1\",\n        \"foo2\": \"bar2\"\n    },\n    \"headers\": {\n        \"x-forwarded-proto\": \"https\",\n        \"host\": \"postman-echo.com\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"cookie\": \"sails.sid=s%3AK8csWt5VZ3Oalv85HiBtffDcrSOJ-RiP.V14RjjJqkOv8%2BLXuHRmZ9l50G8S6eU16yLU%2F3N%2F0dKU\",\n        \"postman-token\": \"c6b9bca5-7369-4da8-a539-6c906d1133f2\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\"\n    },\n    \"url\": \"https://postman-echo.com/get?foo1=bar1&foo2=bar2\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/members/updateUser/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"members",
+								"updateUser",
+								"1"
+							]
+						},
+						"description": "This test is to validate the response time. This Snippet is also available on the right sidebar under `Response time is less than 200ms`."
+					},
+					"response": [
+						{
+							"name": "Performance",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "This is expected to be sent back as part of response body."
+								},
+								"url": {
+									"raw": "https://postman-echo.com/put",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"put"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Nov 2018 22:21:34 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"235-EkrhuBWZKrBKKgRg6q6rJ7DOZ/o\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "set-cookie",
+									"value": "sails.sid=s%3AUuE9kqyAFxbvBvvH8aX3WEBLXiNgjK7-.ErzxoeVFY7HfTK%2BPjoOs%2BzaP3yU8%2BcM59adz0oo9LlA; Path=/; HttpOnly"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "414"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": \"This is expected to be sent back as part of response body.\",\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"x-forwarded-proto\": \"https\",\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"58\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"text/plain\",\n        \"cookie\": \"sails.sid=s%3AK8csWt5VZ3Oalv85HiBtffDcrSOJ-RiP.V14RjjJqkOv8%2BLXuHRmZ9l50G8S6eU16yLU%2F3N%2F0dKU\",\n        \"postman-token\": \"cc394095-6587-4079-bcba-3705b175115d\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\"\n    },\n    \"json\": null,\n    \"url\": \"https://postman-echo.com/put\"\n}"
+						}
+					]
+				},
+				{
+					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns 7 char alphanumeric id\", function () {",
+									"    let jsonData = pm.response.json();",
+									"    pm.expect(jsonData.form.someHash).to.match(/^[a-z0-9]{7}$/);",
+									"});",
+									"",
+									"pm.test(\"Returns 15 char alhpanumeric id\", function () {",
+									"    let jsonData = pm.response.json();",
+									"    pm.expect(jsonData.form.secondHash).to.match(/^[a-z0-9]{15}$/);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/members/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"members",
+								""
+							]
+						},
+						"description": "This test is written to validate the server performed a function as expected."
+					},
+					"response": [
+						{
+							"name": "Functional",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "someHash",
+											"value": "7654321",
+											"type": "text"
+										},
+										{
+											"key": "secondHash",
+											"value": "987654321asdfgh",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://postman-echo.com/post",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"post"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Nov 2018 22:22:08 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"277-9d2jX3MwxfNYN4a9mHbeHYeuEMA\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "set-cookie",
+									"value": "sails.sid=s%3AG3Skk-KwKzhuN9bCFLG38XDvX_n76FY7.SnEQNLnssVB0vIWq0%2Bqn%2FoZhMdvJqAp6Toc8YMDlMhw; Path=/; HttpOnly"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "408"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": \"\",\n    \"files\": {},\n    \"form\": {\n        \"someHash\": \"7654321\",\n        \"secondHash\": \"987654321asdfgh\"\n    },\n    \"headers\": {\n        \"x-forwarded-proto\": \"https\",\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"43\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/x-www-form-urlencoded\",\n        \"cookie\": \"sails.sid=s%3AUuE9kqyAFxbvBvvH8aX3WEBLXiNgjK7-.ErzxoeVFY7HfTK%2BPjoOs%2BzaP3yU8%2BcM59adz0oo9LlA\",\n        \"postman-token\": \"e6a118ae-af47-4fb6-ac35-3cf2bcbafd00\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\"\n    },\n    \"json\": {\n        \"someHash\": \"7654321\",\n        \"secondHash\": \"987654321asdfgh\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Functional2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"let jsonResponse = pm.response.json();",
+									"",
+									"pm.test(\"Response should be a parsable JSON\", function() {",
+									"    pm.expect(jsonResponse).to.be.ok;",
+									"});",
+									"",
+									"pm.test(\"Response body should be an object\", function() {",
+									"    pm.expect(jsonResponse).to.be.an('object');",
+									"});",
+									"",
+									"pm.test(\"Response body should be in the correct format\", function() {",
+									"    pm.expect(jsonResponse.args).to.be.a('object');",
+									"    pm.expect(jsonResponse.data).to.be.a('string');",
+									"    pm.expect(jsonResponse.files).to.be.a('object');",
+									"    pm.expect(jsonResponse.form).to.be.a('object');",
+									"    pm.expect(jsonResponse.headers).to.be.a('object');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "This is expected to be sent back as part of response body."
+						},
+						"url": {
+							"raw": "http://localhost:5000/members/deleteUser/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"members",
+								"deleteUser",
+								"2"
+							]
+						},
+						"description": "This test is written to demonstrate how to bundle several assertions within a single test."
+					},
+					"response": [
+						{
+							"name": "Functional2",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "This is expected to be sent back as part of response body."
+								},
+								"url": {
+									"raw": "https://postman-echo.com/delete",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"delete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Nov 2018 22:22:22 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"236-unqr/LuiPP07B85WHuciASf+YdA\""
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "set-cookie",
+									"value": "sails.sid=s%3Aa9JaDxhKoLl3zyptDL3Vbo-kXgiIoqOY.o566AhO0IGGXbdop127kZi0Xq9bHd0q3RjrHgs2G9c4; Path=/; HttpOnly"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Length",
+									"value": "415"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"args\": {},\n    \"data\": \"This is expected to be sent back as part of response body.\",\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"x-forwarded-proto\": \"https\",\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"58\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"text/plain\",\n        \"cookie\": \"sails.sid=s%3AG3Skk-KwKzhuN9bCFLG38XDvX_n76FY7.SnEQNLnssVB0vIWq0%2Bqn%2FoZhMdvJqAp6Toc8YMDlMhw\",\n        \"postman-token\": \"a26a6cbb-abb4-4e8b-8a1e-4ba63450afcb\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\"\n    },\n    \"json\": null,\n    \"url\": \"https://postman-echo.com/delete\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder contains examples of testing a single HTTP API request.\n\nIn the Postman app, under the \"Tests\" tab for each request, notice the test(s) written to validate specific assertions. Some of these tests are available as a \"Snippet\" on the right sidebar.\n\nSend each request to see the results under the \"Test Results\" tab in the response viewer.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

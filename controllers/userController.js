@@ -206,8 +206,11 @@ exports.getById = async (req, res) => {
   try {
 
     const userId = req.params.userId;
-    const cacheResponse = GetUserFromCache(userId);
-    if (!cacheResponse) {
+    const cacheResponse =await GetUserFromCache(userId);
+    console.log(cacheResponse);
+
+    if (cacheResponse===null) {
+      console.log("cacheResponse is null");
       const response = await axios.get(`https://reqres.in/api/users/${userId}`);
       const user = response.data.data;
       AddUserToCache(user);
@@ -250,10 +253,8 @@ function AddUserToCache(user) {
       fs.writeFileSync(filePath, updatedJsonData, 'utf-8');
 
       console.log('New user added to cache successfully.');
-      res.status(200).json(user);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Internal Server Error AddUserToCache' });
     }
   });
 };
@@ -263,20 +264,31 @@ function GetUserFromCache(userIdToFind) {
       let existingData;
       try {
         existingData = fs.readFileSync(filePath, 'utf-8');
-      console.log("existingData load");
-
       } catch (readError) {
         // Handle the case when the file doesn't exist or other read errors
         console.error('Error reading existing data:', readError);
         existingData = '[]'; // Initialize with an empty array if there's an error
+      }
+
+      // Check if the existing data is a non-empty string
+      if (existingData.trim() === '') {
+        console.log('Cache is empty.');
         return null;
       }
-      console.log(existingData);
+
       // Parse the JSON data into a JavaScript array
-      let dataArray = JSON.parse(existingData);
+      let dataArray;
+      try {
+        dataArray = JSON.parse(existingData);
+        console.log("dataArray",dataArray);
+      } catch (parseError) {
+        // Handle JSON parse errors
+        console.error('Error parsing existing data:', parseError);
+        return null; // Return null when there's an error parsing the JSON data
+      }
 
       // Find the specific user in the array based on the unique identifier
-      const specificUser = dataArray.find(user => user.id === userIdToFind);
+      const specificUser =await dataArray.find(user => user.id === parseInt(userIdToFind, 10));
 
       // Check if the user was found
       if (specificUser) {
@@ -284,16 +296,17 @@ function GetUserFromCache(userIdToFind) {
         console.log('Specific user found:', specificUser);
         return specificUser;
       } else {
-        console.log('User not found.');
+        console.log('User not found.',specificUser);
       }
+
       return null;
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
       return null;
     }
   });
-};
+}
+
 function AddUsersToCache(users) {
   return withLock(async () => {
     try {
@@ -339,7 +352,7 @@ exports.createUser = async (req, res) => {
     // Create a new user using ReqRes API
     const response = await axios.post('https://reqres.in/api/users', req.body);
     const createdUser = response.data;
-
+    AddUserToCache(createdUser);
     res.status(201).json(createdUser);
   } catch (error) {
     console.error(error);
