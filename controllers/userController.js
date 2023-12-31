@@ -145,7 +145,6 @@ const axios = require('axios');
 const fs = require('fs');
 const filePath = 'cache.json';
 const jwt = require('jsonwebtoken');
-const existingData = fs.readFileSync(filePath, 'utf-8');
 const lockfile = require('proper-lockfile');
 
 async function withLock(action) {
@@ -228,10 +227,19 @@ exports.getById = async (req, res) => {
 function AddUserToCache(user) {
   return withLock(async () => {
     try {
-
-      // Parse the JSON data into a JavaScript array
-      const dataArray = JSON.parse(existingData);
-
+      console.log(user);
+      let existingData;
+      try {
+        existingData = fs.readFileSync(filePath, 'utf-8');
+      } catch (readError) {
+        // Handle the case when the file doesn't exist or other read errors
+        console.error('Error reading existing data:', readError);
+        existingData = '[]'; // Initialize with an empty array if there's an error
+      }
+      let dataArray = [];
+      if (existingData) {
+        dataArray = JSON.parse(existingData);
+      }
       // Add the new user to the array
       dataArray.push(user);
 
@@ -252,9 +260,20 @@ function AddUserToCache(user) {
 function GetUserFromCache(userIdToFind) {
   return withLock(async () => {
     try {
+      let existingData;
+      try {
+        existingData = fs.readFileSync(filePath, 'utf-8');
+      console.log("existingData load");
 
+      } catch (readError) {
+        // Handle the case when the file doesn't exist or other read errors
+        console.error('Error reading existing data:', readError);
+        existingData = '[]'; // Initialize with an empty array if there's an error
+        return null;
+      }
+      console.log(existingData);
       // Parse the JSON data into a JavaScript array
-      const dataArray = JSON.parse(existingData);
+      let dataArray = JSON.parse(existingData);
 
       // Find the specific user in the array based on the unique identifier
       const specificUser = dataArray.find(user => user.id === userIdToFind);
@@ -278,8 +297,14 @@ function GetUserFromCache(userIdToFind) {
 function AddUsersToCache(users) {
   return withLock(async () => {
     try {
-      // Read existing JSON data from the cache file
-      const existingData = fs.readFileSync(filePath, 'utf-8');
+      let existingData;
+      try {
+        existingData = fs.readFileSync(filePath, 'utf-8');
+      } catch (readError) {
+        // Handle the case when the file doesn't exist or other read errors
+        console.error('Error reading existing data:', readError);
+        existingData = '[]'; // Initialize with an empty array if there's an error
+      }
 
       // Parse the JSON data into a JavaScript array
       const dataArray = JSON.parse(existingData);
@@ -299,7 +324,7 @@ function AddUsersToCache(users) {
     } catch (error) {
       console.error(error);
       // If you need to send a response, handle it accordingly
-      // res.status(500).json({ error: 'Internal Server Error AddUsersToCache' });
+      return null;
     }
   });
 }
