@@ -28,10 +28,6 @@ This is a simple Users Web List application implemented in Node.js using an exte
    - Method: DELETE
    - Note: Ensure to search if the user exists before deleting.
 
-## Authentication
-
-Implement authentication to secure the endpoints. The choice of authentication method is left to your discretion. Ensure that proper request handling is in place, returning a status of 200 or 204 for successful requests and 404 for incorrect content.
-
 ## CORS Configuration
 
 Configure your app to be consumed only by the following origins:
@@ -49,13 +45,12 @@ Apply design patterns as necessary to write readable, clean, and efficient code.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/your-project.git
+    git clone https://github.com/TamarRosental2000/backend-users-api
     ```
 
 2. Install dependencies:
 
     ```bash
-    cd your-project
     npm install
     ```
 
@@ -72,4 +67,4 @@ Apply design patterns as necessary to write readable, clean, and efficient code.
 Start the server:
 
 ```bash
-npm start
+node app.js
